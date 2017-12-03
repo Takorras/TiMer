@@ -1,8 +1,10 @@
 import React from 'react'
 import moment from 'moment'
 import styled from 'styled-components'
+import config from '../../config'
 
 const Wrapper = styled.div`
+  color: ${config.color.accent};
   text-align: center;
 `
 
