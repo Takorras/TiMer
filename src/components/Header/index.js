@@ -1,24 +1,20 @@
 import React from 'react'
-import Appbar from 'muicss/lib/react/appbar'
+import Option from 'muicss/lib/react/option'
+import Select from 'muicss/lib/react/select'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+  text-align: center;
+`
 
 class Header extends React.Component {
   render() {
-
-    const s1 = {
-      verticalAlign: 'middle',
-      color: 'white'
-    }
-
     return (
-      <div className="mui--bg-accent" style={{backgroundColor: '#3498db'}}>
-        <Appbar>
-        <table width="100%">
-          <tbody>
-            <td style={s1}>App</td>
-          </tbody>
-        </table>
-        </Appbar>
-      </div>
+      <Wrapper>
+        <Select defaultValue="JST">
+          <Option value="JST" label="JST" />
+        </Select>
+      </Wrapper>
     )
   }
 }
