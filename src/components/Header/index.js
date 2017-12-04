@@ -7,16 +7,14 @@ const Wrapper = styled.div`
   text-align: center;
 `
 
-class Header extends React.Component {
-  render() {
-    return (
-      <Wrapper>
-        <Select defaultValue="JST">
-          <Option value="JST" label="JST" />
-        </Select>
-      </Wrapper>
-    )
-  }
+function Header() {
+  return (
+    <Wrapper>
+      <Select defaultValue="JST">
+        <Option value="JST" label="JST" />
+      </Select>
+    </Wrapper>
+  )
 }
 
 export default Header
