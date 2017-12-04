@@ -25,14 +25,21 @@ const Time = styled.h1`
 
 class Clock extends React.Component {
 
-  render(){
-    const m = moment()
+  constructor(props){
+    super(props)
+    this.state = { moment: moment() }
+  }
 
+  componentDidMount() {
+    setInterval(() => {this.setState({moment: this.state.moment.add(1, 'seconds')})}, 1000)
+  }
+
+  render(){
     return (
       <Wrapper>
-        <Dating>{m.format("YYYY-MM-DD")}</Dating>
-        <Day>{m.format("dddd")}</Day>
-        <Time>{m.format("HH:mm:ss")}</Time>
+        <Dating>{this.state.moment.format("YYYY-MM-DD")}</Dating>
+        <Day>{this.state.moment.format("dddd")}</Day>
+        <Time>{this.state.moment.format("HH:mm:ss")}</Time>
       </Wrapper>
     )
   }
