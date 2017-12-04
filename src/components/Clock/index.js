@@ -25,13 +25,12 @@ const Time = styled.h1`
 
 class Clock extends React.Component {
 
-  constructor(props){
-    super(props)
-    this.state = { moment: moment() }
+  componentWillMount(){
+    this.setState({moment: moment()})
   }
 
   componentDidMount() {
-    setInterval(() => {this.setState({moment: this.state.moment.add(1, 'seconds')})}, 1000)
+    setInterval(() => {this.setState({moment: moment()})}, 1000)
   }
 
   render(){
