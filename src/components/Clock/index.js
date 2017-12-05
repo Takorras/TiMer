@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 import styled from 'styled-components'
 import config from '../../config'
 
@@ -23,25 +22,14 @@ const Time = styled.h1`
   margin: 16px;
 `
 
-class Clock extends React.Component {
-
-  componentWillMount(){
-    this.setState({moment: moment()})
-  }
-
-  componentDidMount() {
-    setInterval(() => {this.setState({moment: moment()})}, 1000)
-  }
-
-  render(){
-    return (
-      <Wrapper>
-        <Dating>{this.state.moment.format("YYYY-MM-DD")}</Dating>
-        <Day>{this.state.moment.format("dddd")}</Day>
-        <Time>{this.state.moment.format("HH:mm:ss")}</Time>
-      </Wrapper>
-    )
-  }
+function Clock(props){
+  return (
+    <Wrapper>
+      <Dating>{props.now}</Dating>
+      <Day>{props.now}</Day>
+      <Time>{props.now}</Time>
+    </Wrapper>
+  )
 }
 
 export default Clock

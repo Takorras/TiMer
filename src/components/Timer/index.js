@@ -20,21 +20,23 @@ function Cell(props) {
   )
 }
 
-function TimerButton(props) {
-  return (
-    <Button size="large" onClick={props.onClick}>
-      {props.counting ? 'Stop' : 'Start'}
-    </Button>
-  )
-}
-
 class Timer extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      history: []
+      history: [],
+      counting: false,
+      start: 1,
+      end: 1
     }
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick(){
+    this.setState({
+      counting: !this.state.counting
+    })
   }
 
   render() {
@@ -48,7 +50,9 @@ class Timer extends React.Component {
 
     return (
       <Wrapper>
-        {TimerButton(this.props)}
+        <Button size="large" onClick={this.handleClick}>
+          {this.state.counting ? 'Stop' : 'Start'}
+        </Button>
         <ol>{raps}</ol>
       </Wrapper>
     )
