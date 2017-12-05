@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../Header'
 import Clock from '../Clock'
+import Timer from '../Timer'
 import styled from 'styled-components'
 import config from '../../config'
 
@@ -19,8 +20,8 @@ class App extends React.Component {
   render() {
     return (
       <Wrapper>
-        <Header />
         <Clock />
+        <Timer />
       </Wrapper>
     )
   }
