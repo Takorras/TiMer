@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import Button from 'muicss/lib/react/button'
 import config from '../../config'
 
@@ -26,9 +27,7 @@ class Timer extends React.Component {
     super(props)
     this.state = {
       history: [],
-      counting: false,
-      start: 1,
-      end: 1
+      counting: false
     }
     this.handleClick = this.handleClick.bind(this)
   }
@@ -43,7 +42,7 @@ class Timer extends React.Component {
     const raps = this.state.history.map((element, index) => {
       return(
         <li key={index}>
-          <TimerCell>{element}</TimerCell>
+          {Cell(this.state)}
         </li>
       )
     })
@@ -57,6 +56,10 @@ class Timer extends React.Component {
       </Wrapper>
     )
   }
+}
+
+Timer.propTypes = {
+  now: PropTypes.number.isRequired
 }
 
 export default Timer

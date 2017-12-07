@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import config from '../../config'
+import PropTypes from 'prop-types'
+import moment from 'moment'
 
 const Wrapper = styled.div`
   color: ${config.color.accent};
@@ -25,11 +27,15 @@ const Time = styled.h1`
 function Clock(props){
   return (
     <Wrapper>
-      <Dating>{props.now}</Dating>
-      <Day>{props.now}</Day>
-      <Time>{props.now}</Time>
+      <Dating>{moment(props.now).format('YYYY-DD-MM')}</Dating>
+      <Day>{moment(props.now).format('dddd')}</Day>
+      <Time>{moment(props.now).format('HH:MM:ss')}</Time>
     </Wrapper>
   )
+}
+
+Clock.propTypes = {
+  now: PropTypes.number.isRequired
 }
 
 export default Clock

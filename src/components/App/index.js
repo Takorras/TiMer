@@ -21,12 +21,18 @@ class App extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      now: moment()
+      now: moment().unix()
+    }
+  }
+
+  compnentWillMount() {
+    this.setState = {
+      now: moment().unix()
     }
   }
 
   componentDidMount() {
-    setInterval(() => {this.setState({now: moment()})}, 1000)
+    setInterval(() => {this.setState({now: this.state.now + 1})}, 1000)
   }
 
   render() {
