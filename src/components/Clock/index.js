@@ -27,9 +27,9 @@ const Time = styled.h1`
 function Clock(props){
   return (
     <Wrapper>
-      <Dating>{moment(props.now).format('YYYY-DD-MM')}</Dating>
+      <Dating>{moment(props.now).format('YYYY-MM-DD')}</Dating>
       <Day>{moment(props.now).format('dddd')}</Day>
-      <Time>{moment(props.now).format('HH:MM:ss')}</Time>
+      <Time>{moment(props.now).format('HH:mm:ss')}</Time>
     </Wrapper>
   )
 }

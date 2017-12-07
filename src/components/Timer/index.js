@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import Button from 'muicss/lib/react/button'
+import moment from 'moment'
 import config from '../../config'
 
 const Wrapper = styled.div`
@@ -17,7 +18,7 @@ const TimerCell = styled.h2`
 
 function Cell(props) {
   return (
-    <TimerCell>{props.start} - {props.end} {props.interval}</TimerCell>
+    <TimerCell>{moment.unix(props.start).format('HH:mm:ss')} - {moment.unix(props.end).format('HH:mm:ss')} {props.end - props.start}</TimerCell>
   )
 }
 
@@ -27,12 +28,14 @@ class Timer extends React.Component {
     super(props)
     this.state = {
       history: [],
-      counting: false
+      counting: false,
+      period: null
     }
     this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick(){
+    this.state.counting ? this.state.history.push({start: this.state.period, end: this.props.now}) : this.setState({period: this.props.now})
     this.setState({
       counting: !this.state.counting
     })
@@ -42,7 +45,7 @@ class Timer extends React.Component {
     const raps = this.state.history.map((element, index) => {
       return(
         <li key={index}>
-          {Cell(this.state)}
+          {Cell(element)}
         </li>
       )
     })
