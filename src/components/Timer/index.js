@@ -19,14 +19,17 @@ const Timer = (props) => (
   <Wrapper>
     <ol>
       {props.histories.map((history, index) => {
+        const start = history.start
+        const end = history.end
+        const now = props.now
 
-        const value = `${moment.unix(history.start).format('HH:mm:ss')} -
-        ${history.end ? moment.unix(history.end).format('HH:mm:ss') : '----'} -
-        ${history.end ? history.end - history.start : ''}`
+        const value = `${moment.unix(start).format('HH:mm:ss')} -
+        ${end ? moment.unix(end).format('HH:mm:ss') : moment.unix(now).format('HH:mm:ss')} -
+        ${end ? moment.unix(end - start - 32400).format('HH:mm:ss') : moment.unix(now - start - 32400).format('HH:mm:ss')}`
 
         return (
           <li key = {index}>
-            <TimerCell>{value}</TimerCell>
+            <TimerCell> {value} </TimerCell>
           </li>
         )
       })}
@@ -35,6 +38,7 @@ const Timer = (props) => (
 )
 
 Timer.propTypes = {
+  now: PropTypes.number,
   histories: PropTypes.array,
 }
 
