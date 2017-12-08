@@ -17,9 +17,19 @@ const TimerCell = styled.h2`
 `
 
 function Cell(props) {
+
+  let v = `${moment.unix(props.start).format('HH:mm:ss')} to
+  ${props.end ? moment.unix(props.end).format('HH:mm:ss') : '--:--:--'}
+  ${props.end ? props.end - props.start : '-'}`
+
   return (
-    <TimerCell>{moment.unix(props.start).format('HH:mm:ss')} - {moment.unix(props.end).format('HH:mm:ss')} {props.end - props.start}</TimerCell>
+    <TimerCell>{v}</TimerCell>
   )
+}
+
+Cell.propTypes = {
+  start: PropTypes.number.isRequired,
+  end: PropTypes.number
 }
 
 class Timer extends React.Component {
@@ -27,35 +37,49 @@ class Timer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      history: [],
-      counting: false,
-      period: null
+      histories: [],
+      counting: false
     }
     this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick(){
-    this.state.counting ? this.state.history.push({start: this.state.period, end: this.props.now}) : this.setState({period: this.props.now})
+    if (!this.state.counting) {
+      this.state.histories.push({start: this.props.now, end: null,})
+    } else {
+      let stateCopy = this.state.histories.slice()
+      stateCopy[stateCopy.length - 1].end = this.props.now
+      this.setState({histories: stateCopy})
+    }
+
     this.setState({
       counting: !this.state.counting
     })
   }
 
-  render() {
-    const raps = this.state.history.map((element, index) => {
-      return(
-        <li key={index}>
-          {Cell(element)}
-        </li>
-      )
-    })
+  renderCell(i) {
+    const history = this.state.histories[i]
+    let value = `${moment.unix(history.start).format('HH:mm:ss')} -
+    ${history.end ? moment.unix(history.end).format('HH:mm:ss') : moment.unix(this.props.now).format('HH:mm:ss')}
+    ${history.end ? history.end - history.start : this.props.now - history.start}`
+    return (
+      <TimerCell>{value}</TimerCell>
+    )
+  }
 
+  render() {
     return (
       <Wrapper>
         <Button size="large" onClick={this.handleClick}>
           {this.state.counting ? 'Stop' : 'Start'}
         </Button>
-        <ol>{raps}</ol>
+        <ol>{this.state.histories.map((element, index) => {
+          return (
+            <li key={index}>
+              {this.renderCell(index)}
+            </li>
+          )
+        })}</ol>
       </Wrapper>
     )
   }
