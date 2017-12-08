@@ -32,12 +32,6 @@ const Clock = (props) => (
   </Wrapper>
 )
 
-// function Clock(props){
-//   return (
-//
-//   )
-// }
-
 Clock.propTypes = {
   now: PropTypes.number.isRequired
 }
