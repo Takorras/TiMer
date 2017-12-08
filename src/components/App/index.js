@@ -4,6 +4,7 @@ import moment from 'moment'
 import config from '../../config'
 import Clock from '../Clock'
 import Timer from '../Timer'
+import TimerButton from '../TimerButton'
 
 const Wrapper = styled.div`
   background: ${config.color.main};
@@ -22,12 +23,8 @@ class App extends React.Component {
     super(props)
     this.state = {
       now: moment().unix(),
-    }
-  }
-
-  compnentWillMount() {
-    this.setState = {
-      now: moment().unix()
+      histories: [],
+      counting: false,
     }
   }
 
@@ -35,11 +32,27 @@ class App extends React.Component {
     setInterval(() => { this.setState({now: this.state.now + 1})}, 1000)
   }
 
+  handleClick(){
+    this.setState({counting: !this.state.counting})
+
+    if (this.state.counting) {
+      let stateCopy = this.state.histories.slice()
+      stateCopy[this.state.histories.length - 1].end = this.state.now
+      this.setState({histories: stateCopy})
+    } else {
+      this.state.histories.push({
+        start: this.state.now,
+        end: null,
+      })
+    }
+  }
+
   render() {
     return (
       <Wrapper>
-        {Clock(this.state.now)}
-        <Timer now={this.state.now}/>
+        {Clock(this.state)}
+        <TimerButton counting = {this.state.counting} onClick = {() => this.handleClick()} />
+        {Timer(this.state)}
       </Wrapper>
     )
   }
