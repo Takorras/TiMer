@@ -24,15 +24,19 @@ const Time = styled.h1`
   margin: 16px;
 `
 
-function Clock(props){
-  return (
-    <Wrapper>
-      <Dating>{moment(props.now).format('YYYY-MM-DD')}</Dating>
-      <Day>{moment(props.now).format('dddd')}</Day>
-      <Time>{moment(props.now).format('HH:mm:ss')}</Time>
-    </Wrapper>
-  )
-}
+const Clock = (props) => (
+  <Wrapper>
+    <Dating>{moment.unix(props.now).format('YYYY-MM-DD')}</Dating>
+    <Day>{moment.unix(props.now).format('dddd')}</Day>
+    <Time>{moment.unix(props.now).format('HH:mm:ss')}</Time>
+  </Wrapper>
+)
+
+// function Clock(props){
+//   return (
+//
+//   )
+// }
 
 Clock.propTypes = {
   now: PropTypes.number.isRequired
