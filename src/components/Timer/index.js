@@ -47,8 +47,9 @@ class Timer extends React.Component {
   renderCell(i) {
     const history = this.state.histories[i]
     let value = `${moment.unix(history.start).format('HH:mm:ss')} -
-    ${history.end ? moment.unix(history.end).format('HH:mm:ss') : moment.unix(this.props.now).format('HH:mm:ss')}
-    ${history.end ? history.end - history.start : this.props.now - history.start}`
+    ${history.end ? moment.unix(history.end).format('HH:mm:ss') : moment.unix(this.props.now).format('HH:mm:ss')} - 
+    ${history.end ? moment.unix(history.end - history.start - 32400).format('HH:mm:ss') : moment.unix(this.props.now - history.start - 32400).format('HH:mm:ss')}`
+
     return (
       <TimerCell>{value}</TimerCell>
     )
@@ -57,10 +58,10 @@ class Timer extends React.Component {
   render() {
     return (
       <Wrapper>
-        <Button size="large" onClick={this.handleClick}>
+        <Button size="large" onClick = {this.handleClick}>
           {this.state.counting ? 'Stop' : 'Start'}
         </Button>
-        <ol>{this.state.histories.map((element, index) => {
+        <ol> {this.state.histories.map((element, index) => {
           return (
             <li key={index}>
               {this.renderCell(index)}
