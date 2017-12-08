@@ -1,9 +1,9 @@
 import React from 'react'
-import Clock from '../Clock'
-import Timer from '../Timer'
 import styled from 'styled-components'
 import moment from 'moment'
 import config from '../../config'
+import Clock from '../Clock'
+import Timer from '../Timer'
 
 const Wrapper = styled.div`
   background: ${config.color.main};
@@ -18,10 +18,10 @@ const Wrapper = styled.div`
 
 class App extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
-      now: moment().unix()
+      now: moment().unix(),
     }
   }
 
@@ -32,7 +32,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    setInterval(() => {this.setState({now: this.state.now + 1})}, 1000)
+    setInterval(() => { this.setState({now: this.state.now + 1})}, 1000)
   }
 
   render() {

@@ -1,8 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
-import config from '../../config'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import styled from 'styled-components'
+import config from '../../config'
 
 const Wrapper = styled.div`
   color: ${config.color.accent};

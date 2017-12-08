@@ -16,36 +16,23 @@ const TimerCell = styled.h2`
   margin-bottom: 0;
 `
 
-function Cell(props) {
-
-  let v = `${moment.unix(props.start).format('HH:mm:ss')} to
-  ${props.end ? moment.unix(props.end).format('HH:mm:ss') : '--:--:--'}
-  ${props.end ? props.end - props.start : '-'}`
-
-  return (
-    <TimerCell>{v}</TimerCell>
-  )
-}
-
-Cell.propTypes = {
-  start: PropTypes.number.isRequired,
-  end: PropTypes.number
-}
-
 class Timer extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
       histories: [],
-      counting: false
+      counting: false,
     }
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(){
+  handleClick() {
     if (!this.state.counting) {
-      this.state.histories.push({start: this.props.now, end: null,})
+      this.state.histories.push({
+        start: this.props.now,
+        end: null,
+      })
     } else {
       let stateCopy = this.state.histories.slice()
       stateCopy[stateCopy.length - 1].end = this.props.now
