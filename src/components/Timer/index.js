@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   text-align: center;
 `
 
-const TimerCell = styled.h2`
+const TimerCell = styled.span`
   font-size: 1.6em;
   margin-top: 0;
   margin-bottom: 0;
